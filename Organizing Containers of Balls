@@ -1,0 +1,21 @@
+t=int(input())
+for _ in range(t):
+    n=int(input())
+    a=[]
+    capacity=[]
+    for i in range(n):
+        l=list(map(int,input().strip().split()))
+        a.append(l)
+        capacity.append(sum(l))
+    balls=[]
+    for i in range(n):
+        temp=0
+        for j in range(n):
+            temp+=a[j][i]
+        balls.append(temp)
+    capacity.sort()
+    balls.sort()
+    if capacity==balls:
+        print('Possible')
+    else:
+        print('Impossible')
