@@ -1,0 +1,32 @@
+n,k=tuple(map(int,input().strip().split()))
+a=list(map(int,input().strip().split()))
+d={}
+for i in a:
+    temp=i%k
+    if temp not in d:
+        d[temp]=0
+    d[temp]+=1
+for key,v in d.items():
+    if key==0:
+        d[0]=1
+    else:
+        if k/2==key:
+            d[key]=1
+l=sorted(d,key=lambda x:d[x],reverse=True)
+maxi=-1
+for i in range(len(l)):
+    temp=[l[i]]
+    for j in range(i+1,len(l)):
+        f=True
+        for z in range(len(temp)):
+            if (temp[z]+l[j])%k==0:
+                f=False
+                break
+        if f:
+            temp.append(l[j])
+    c=0
+    for z in range(len(temp)):
+        c=c+d[temp[z]]
+    if c>maxi:
+        maxi=c
+print(maxi)
