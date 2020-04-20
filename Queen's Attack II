@@ -1,0 +1,87 @@
+n,k=tuple(map(int,input().strip().split()))
+r,c=tuple(map(int,input().strip().split()))
+back=10**5+17
+front=10**5+17
+up=10**5+17
+down=10**5+17
+upd1=10**5+17
+downd1=10**5+17
+upd2=10**5+17
+downd2=10**5+17
+for _ in range(k):
+    temp=list(map(int,input().strip().split()))
+    if temp[0]==r:
+        if temp[1]<c:
+            if c-temp[1]-1<back:
+                #back.append(c-temp[1]-1)
+                back=c-temp[1]-1
+        else:
+            if temp[1]-c-1<front:
+                #front.append(temp[1]-c-1)
+                front=temp[1]-c-1
+    elif temp[1]==c:
+        if temp[0]>r:
+            if temp[0]-r-1<up:
+                #up.append(temp[0]-r-1)
+                up=temp[0]-r-1
+        else:
+            if r-temp[0]-1<down:
+                #down.append(r-temp[0]-1)
+                down=r-temp[0]-1
+    else:
+        dx=temp[0]-r
+        dy=temp[1]-c
+        if abs(dx)==abs(dy):
+            if dx*dy<0:
+                if dx>0 and dy<0:
+                    if abs(dx)-1<upd1:
+                        #upd1.append(abs(dx))
+                        upd1=abs(dx)-1
+                else:
+                    if abs(dx)-1<downd1:
+                        #downd1.append(abs(dx))
+                        downd1=abs(dx)-1
+            else:
+                if dx>0 and dy>0:
+                    if abs(dx)-1<upd2:
+                        #upd2.append(dx)
+                        upd2=abs(dx)-1
+                else:
+                    if abs(dx)-1<downd2:
+                        #downd2.append(abs(dx))
+                        downd2=abs(dx)-1
+count=0
+#print(back,front,up,down,upd1,downd1,upd2,downd2)
+if back!=10**5+17:
+    count+=back
+else:
+    count+=c-1
+if front!=10**5+17:
+    count+=front
+else:
+    count+=n-c
+if up!=10**5+17:
+    count+=up
+else:
+    count+=n-r
+if down!=10**5+17:
+    count+=down
+else:
+    count+=r-1
+if upd1!=10**5+17:
+    count+=upd1
+else:
+    count+=min(n-r,c-1)
+if downd1!=10**5+17:
+    count+=downd1
+else:
+    count+=min(r-1,n-c)
+if upd2!=10**5+17:
+    count+=upd2
+else:
+    count+=min(n-r,n-c)
+if downd2!=10**5+17:
+    count+=downd2
+else:
+    count+=min(r-1,c-1)
+print(count)
