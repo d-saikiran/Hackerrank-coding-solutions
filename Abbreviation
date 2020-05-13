@@ -1,0 +1,68 @@
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+sys.setrecursionlimit(10**6)
+# Complete the abbreviation function below.
+def abbreviation(a, b,ai,bi):
+    print(a[ai],b[bi])
+    #print(a[ai],b[bi])
+    if r[bi][ai]!=None:
+        return r[bi][ai]
+    if ai==0 or bi==0:
+        if bi!=0:
+            r[bi][ai]=False
+            return False
+        if a[ai].upper()==b[0].upper():
+            r[bi][ai]=True
+            return True
+        if ai>0:
+            if ord(a[ai])>=97 and ord(a[ai])<=122:
+                temp=abbreviation(a,b,ai-1,bi)
+                r[bi][ai]=temp
+                return temp
+        r[bi][ai]=False
+        return False
+    if a[ai].upper()==b[bi].upper():
+        if abbreviation(a,b,ai-1,bi-1):
+            r[bi][ai]=True
+            return True
+        elif ord(a[ai])>=97 and ord(a[ai])<=122:
+            if abbreviation(a,b,ai-1,bi):
+                r[bi][ai]=True
+                return True
+    #print(a[ai],b[bi])
+    if ord(a[ai])>=97 and ord(a[ai])<=122:
+        #print(a[ai],ord(a[ai]))
+        temp=abbreviation(a,b,ai-1,bi)
+        r[bi][ai]=temp
+        return temp
+    #print(a[ai],b[bi])
+    r[bi][ai]=False
+    return False
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    q = int(input())
+
+    for q_itr in range(q):
+        a = input()
+
+        b = input()
+
+        r=[]
+        l=[None for i in a]
+        for j in b:
+            temp=l[:]
+            r.append(temp)
+
+        result = abbreviation(a, b,len(a)-1,len(b)-1)
+        if result:
+            fptr.write('YES' + '\n')
+        else:
+            fptr.write('NO '+'\n')
+
+    fptr.close()
