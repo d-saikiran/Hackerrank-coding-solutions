@@ -1,0 +1,26 @@
+import operator
+import math
+def find_char(s):
+    i=0
+    while s[i].isdigit():
+        i+=1
+    return s[i:]
+n=int(input())
+d={}
+for i in range(math.ceil(n/2)):
+    s=input().split()
+    d[str(i)+'-']=int(s[0])
+for i in range(n//2):
+    s=input().split()
+    d[str(i)+s[1]]=int(s[0])
+d=list(sorted(d.items(),key=operator.itemgetter(1)))
+#print(d)
+pd=find_char(d[0][0])
+data=[]
+#data.append(pd)
+for i in range(len(d)):
+    pd=find_char(d[i][0])
+    data.append(pd)
+print(*data,sep=' ')
+
+    
