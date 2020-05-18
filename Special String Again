@@ -1,0 +1,27 @@
+n=int(input())
+s=input()
+s=s
+c=0
+for i in range(n):
+    cout=1
+    mid=False
+    #target=s[i]
+    #print(s[i])
+    for j in range(i+1,n):
+        #print(i,j,mid,cout)
+        if s[j]==s[i] and not(mid):
+            c+=1
+            cout+=1
+        elif mid:
+            #cout-=1
+            if s[i]==s[j]:
+                cout-=1
+            else:
+                break
+            if cout==0:
+                #print(i,j)
+                c+=1
+                break
+        else:
+            mid=True
+print(len(s)+c)
