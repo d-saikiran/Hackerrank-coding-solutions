@@ -1,0 +1,13 @@
+def solve(n,p,num,c=0):
+    if n==0:
+        return 1
+    elif n<0:
+        return 0
+    if num**p>n:
+        return 0
+    c=c+solve(n,p,num+1,0)
+    c=c+solve(n-num**p,p,num+1,0)
+    return c
+n=int(input())
+p=int(input())
+print(solve(n,p,0)//2)
