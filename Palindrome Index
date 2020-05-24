@@ -1,0 +1,18 @@
+t=int(input())
+for _ in range(t):
+    s=input()
+    if s==s[::-1]:
+        print(-1)
+    else:
+        i=0
+        j=len(s)-1
+        while s[i]==s[j]:
+            i+=1
+            j-=1
+        t1=s[:i]+s[i+1:]
+        f=True
+        if t1==t1[::-1]:
+            print(i)
+            f=False
+        if f:
+            print(j)
