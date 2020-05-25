@@ -1,0 +1,38 @@
+# Complete the isValid function below.
+def isValid(s):
+    d={}
+    for i in s:
+        if i not in d:
+            d[i]=0
+        d[i]+=1
+    k=list(d.values())
+    #print(k)
+    k.sort()
+    #print(k)
+    c=list(set(k))
+    #print(c)
+    if len(c)>2:
+        return 'NO'
+    elif len(c)==1:
+        return 'YES'
+    t=k.count(min(c[0],c[1]))
+    #t2=k.count(c[1])
+    #print(t1,t2)
+    if t>1:
+        return 'NO'
+    if c[0]<c[1]:
+        if c[0]==1:
+            return 'YES'
+        elif c[0]+1==c[1]:
+            return 'YES'
+        else:
+            return 'NO'
+    else:
+        if c[0]-1==c[1]:
+            return 'YES'
+        else:
+            return 'NO'
+    #return 'YES'
+s = input()
+result = isValid(s)
+print(result)
