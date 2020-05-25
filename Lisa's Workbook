@@ -1,0 +1,25 @@
+n,k=tuple(map(int,input().split()))
+a=list(map(int,input().split()))
+pgno=1
+c=0
+for i in a:
+    if i<=k:
+        if pgno<=i:
+            #print(pgno)
+            c+=1
+        pgno+=1
+    else:
+        start=1
+        end=k
+        while i>0:
+            if pgno>=start and pgno<=end:
+                #print(pgno,start,end)
+                c+=1
+            i-=k
+            pgno+=1
+            start=end+1
+            if i>k:
+                end+=k
+            else:
+                end=start+i-1
+print(c)
