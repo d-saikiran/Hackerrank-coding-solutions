@@ -1,0 +1,38 @@
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+# Complete the toys function below.
+def toys(w):
+    w=list(set(w))
+    w.sort()
+    c=0
+    i=0
+    while i<len(w):
+        t=w[i]
+        j=i+1
+        if j<len(w):
+            while w[j]<=t+4:
+                j+=1
+                if j==len(w):
+                    break
+        c+=1
+        i=j
+    return c
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    n = int(input())
+
+    w = list(map(int, input().rstrip().split()))
+
+    result = toys(w)
+
+    fptr.write(str(result) + '\n')
+
+    fptr.close()
