@@ -1,0 +1,54 @@
+n=int(input())
+a=list(map(int,input().split()))
+b=sorted(a)
+f=True
+#c=0
+index=[]
+for i in range(n):
+    if a[i]!=b[i]:
+        index.append(i)
+    if len(index)>2:
+        f=False
+        break
+if f:
+    print('yes')
+    print('swap',index[0]+1,index[1]+1)
+else:
+    rev=True
+    f1=True
+    i=0
+    while i<n-1:
+        #print(i)
+        #print(a[i],a[i+1])
+        if a[i]>a[i+1]:
+            #print(a[i],a[i+1])
+            if rev:
+                #print('*')
+                rev=False
+                start=i+1
+                j=i
+                while a[j]>a[j+1]:
+                    j+=1
+                    if j>=n-1:
+                        break
+            else:
+                f1=False
+                break
+            #print(a[i],a[j])
+            i=j
+            end=j+1
+            #print('@',a[start],a[end],i,n-1,f1)
+        i+=1
+    if f1:
+        #f2=True
+        temp=a[start-1:end]
+        temp=temp[::-1]
+        c=a[:start-1]+temp+a[end:]
+        #print(c,temp)
+        if c!=b:
+            print('no')
+        else:    
+            print('yes')
+            print('reverse',start,end)
+    else:
+        print('no')
