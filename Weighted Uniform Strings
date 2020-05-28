@@ -1,0 +1,56 @@
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+# Complete the weightedUniformStrings function below.
+def weightedUniformStrings(s, queries):
+    a=[]
+    s+='#'
+    temp=[]
+    temp.append(ord(s[0])-96)
+    for i in range(1,len(s)):
+        if s[i]==s[i-1]:
+            temp.append(temp[-1])
+        else:
+            a.append(temp)
+            temp=[]
+            temp.append(ord(s[i])-96)
+    #print(a)
+    res=[]
+    for i in queries:
+        if solve(a,i):
+            res.append('Yes')
+        else:
+            res.append('No')
+    return res
+def solve(a,k):
+    for lst in a:
+        if k%lst[-1]==0:
+            t=k//lst[-1]
+            if t<=len(lst):
+                return True
+    return False
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    s = input()
+
+    queries_count = int(input())
+
+    queries = []
+
+    for _ in range(queries_count):
+        queries_item = int(input())
+        queries.append(queries_item)
+
+    result = weightedUniformStrings(s, queries)
+
+    fptr.write('\n'.join(result))
+    fptr.write('\n')
+
+    fptr.close()
