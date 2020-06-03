@@ -1,0 +1,36 @@
+import math
+import os
+import random
+import re
+import sys
+
+#
+# Complete the 'getWays' function below.
+#
+# The function is expected to return a LONG_INTEGER.
+# The function accepts following parameters:
+#  1. INTEGER n
+#  2. LONG_INTEGER_ARRAY c
+#
+sys.setrecursionlimit(10**6)
+cache={}
+def getWays(n, c):
+    # Write your code here
+    return solve(n,c,len(c)-1)
+def solve(sum,coin,index):
+    #print(sum)
+    key=str(sum)+','+str(index)
+    if sum==0:
+        return 1
+    if sum<0:
+        return 0
+    if index<0:
+        return 0
+    if key in cache:
+        return cache[key]
+    res=solve(sum,coin,index-1)+solve(sum-coin[index],coin,index)
+    cache[key]=res
+    return res
+v,n=tuple(map(int,input().split()))
+a=list(map(int,input().split()))
+print(getWays(v,a))
