@@ -1,0 +1,25 @@
+import sys
+sys.setrecursionlimit(10**9)
+def solve(i,k):
+    if i<0 or k==0:
+        return 0
+    if cache[i][k-1]!=None:
+        return cache[i][k-1]
+    elif a[i]>k:
+        result=solve(i-1,k)
+    else:
+        t1=solve(i-1,k)
+        t2=a[i]+solve(i-1,k-a[i])
+        t3=a[i]+solve(i,k-a[i])
+        result=max(t1,t2,t3)
+    cache[i][k-1]=result
+    return result
+for _ in range(int(input())):
+    n,k=tuple(map(int,input().split()))
+    cache=[]
+    for i in range(n):
+        cache.append([None for j in range(k)])
+    #print(cache)
+    a=list(map(int,input().split()))
+    print(solve(n-1,k))
+    #print(cache)
