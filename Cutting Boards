@@ -1,0 +1,33 @@
+def solve(m,n,x,y):
+    x.sort(reverse=True)
+    y.sort(reverse=True)
+    #print(x,y,m,n)
+    i=0
+    j=0
+    h=1
+    v=1
+    res=0
+    while i<m-1 and j<n-1:
+        if x[i]>y[j]:
+            res=(res+x[i]*v)%(10**9+7)
+            h+=1
+            i+=1
+        else:
+            res=(res+y[j]*h)%(10**9+7)
+            v+=1
+            j+=1
+    #remain
+    while i<m-1:
+        res=(res+x[i]*v)%(10**9+7)
+        i+=1
+    while j<n-1:
+        res=(res+y[j]*h)%(10**9+7)
+        j+=1
+    return res
+for _ in range(int(input())):
+    m,n=tuple(map(int,input().split()))
+    #horiz
+    x=list(map(int,input().split()))
+    #vertical
+    y=list(map(int,input().split()))
+    print(solve(m,n,x,y))
