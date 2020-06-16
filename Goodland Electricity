@@ -1,0 +1,28 @@
+def solve(n,k):
+    i=0
+    res=0
+    p=-1
+    while i<n:
+        #p=i
+        temp=i+k
+        if temp>=n:
+            temp=n-1
+        #print(a[i:temp])
+        f=False
+        while temp>p:
+            if a[temp]==1:
+                f=True
+                break
+            temp-=1
+        if f:
+            res+=1
+            p=temp
+            i=temp+k+1
+            #print(i,temp)
+        else:
+            res=-1
+            break
+    return res
+n,k=tuple(map(int,input().split()))
+a=list(map(int,input().split()))
+print(solve(n,k-1))
