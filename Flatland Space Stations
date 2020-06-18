@@ -1,0 +1,19 @@
+n,k=tuple(map(int,input().split()))
+a=list(map(int,input().split()))
+a.sort()
+res=[]
+if a[0]!=0:
+    res.append(a[0])
+if a[-1]!=n-1:
+    res.append(n-1-a[-1])
+#print(res)
+for i in range(len(a)-1):
+    #print(i)
+    m=(a[i]+a[i+1])//2
+    res.append(min(m-a[i],a[i+1]-m))
+    #print(res)
+#print(res)
+if len(res)==0:
+    print(0)
+else:
+    print(max(res))
