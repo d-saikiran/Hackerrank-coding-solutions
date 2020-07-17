@@ -1,0 +1,53 @@
+def solve(a,k):
+    r,c=find_start(a)
+    res=find_moves(r,c,0)
+    #print(res)
+    if res==k:
+        return 'Impressed'
+    return 'Oops!'
+def find_start(a):
+    for i in range(len(a)):
+        for j in range(len(a[i])):
+            if a[i][j]=='M':
+                return i,j
+def find_moves(i,j,moves):
+    if i<0 or i>=n or j<0 or j>=m:
+        return 10**32
+    elif a[i][j]=='X':
+        return 10**32
+    elif a[i][j]=='*':
+        return moves
+    a[i][j]='1'
+    poss=[]
+    if i-1>=0:
+        if a[i-1][j]=='.' or a[i-1][j]=='*':
+            poss.append([i-1,j])
+    if i+1<n:
+        if a[i+1][j]=='.' or a[i+1][j]=='*':
+            poss.append([i+1,j])
+    if j-1>=0:
+        if a[i][j-1]=='.' or a[i][j-1]=='*':
+            poss.append([i,j-1])
+    if j+1<m:
+        if a[i][j+1]=='.' or a[i][j+1]=='*':
+            poss.append([i,j+1])
+    if len(poss)>1:
+        moves+=1
+    for x in poss:
+        ti=x[0]
+        tj=x[1]
+        res=find_moves(ti,tj,moves)
+        if res!=10**32:
+            return res
+    return 10**32
+for _ in range(int(input())):
+    n,m=map(int,input().split())
+    a=[]
+    for __ in range(n):
+        tmp=input()
+        l=[]
+        for i in tmp:
+            l.append(i)
+        a.append(l)
+    k=int(input())
+    print(solve(a,k))
