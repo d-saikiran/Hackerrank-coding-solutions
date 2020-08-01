@@ -1,0 +1,73 @@
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+# Complete the connectedCell function below.
+val=[]
+def connectedCell(mat):
+    maxi=-1
+    global val
+    for i in range(n):
+        tmp=[None for j in range(m)]
+        val.append(tmp)
+    for i in range(len(mat)):
+        for j in range(len(mat[i])):
+            #print(mat[i][j])
+            if mat[i][j]:
+                #print(i,j,123)
+                vis={}
+                tmp=find_area(i,j,vis)
+                if tmp>maxi:
+                    maxi=tmp
+    #print(val)
+    return maxi
+def find_area(i,j,vis):
+    #print(i,j)
+    key=str(i)+','+str(j)
+    if i>=n or j>=m or i<0 or j<0:
+        return 0
+    if key in vis:
+        #vis[key]=True
+        return 0
+    vis[key]=True
+    if val[i][j]!=None:
+        return val[i][j]
+    if mat[i][j]:
+        #print(i,j,vis)
+        tmp=1
+        tmp+=find_area(i+1,j,vis)
+        tmp+=find_area(i-1,j,vis)
+        tmp+=find_area(i,j+1,vis)
+        tmp+=find_area(i,j-1,vis)
+        tmp+=find_area(i+1,j+1,vis)
+        tmp+=find_area(i-1,j+1,vis)
+        tmp+=find_area(i+1,j-1,vis)
+        tmp+=find_area(i-1,j+1,vis)
+        val[i][j]=tmp
+        #vis[key]=True
+        return tmp
+    val[i][j]=0
+    return 0
+
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    n = int(input())
+
+    m = int(input())
+
+    mat = []
+
+    for _ in range(n):
+        mat.append(list(map(int, input().rstrip().split())))
+
+    result = connectedCell(mat)
+
+    fptr.write(str(result) + '\n')
+
+    fptr.close()
