@@ -1,0 +1,32 @@
+def solve():
+        n=int(input())
+        a=list(map(int,input().split()))
+        d={}
+        c=0
+        for i in a:
+                d[i]=c
+                c+=1
+        d=list(sorted(d.items(),reverse=True))
+        #print(d)
+        prevind=d[0][1]
+        if prevind==0:
+                print('BOB')
+                return
+        c=1
+        for i in range(1,n):
+                if d[i][1]<prevind:
+                        c+=1
+                        prevind=d[i][1]
+                if prevind==0:
+                        if c%2:
+                                print('BOB')
+                        else:
+                                print('ANDY')
+                        return
+        if c%2:
+                print('BOB')
+        else:
+                print('ANDY')
+        return
+for _ in range(int(input())):
+        solve()
