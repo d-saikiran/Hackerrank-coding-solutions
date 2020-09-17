@@ -1,0 +1,35 @@
+def solve():
+        n=int(input())
+        n=2*n
+        a=[]
+        #res=[]
+        for i in range(n):
+                a.append(list(map(int,input().split())))
+                #res.append([None for j in range(n)])
+        final=[]
+        tmp=0
+        for i in range(n//2):
+                for j in range(n//2):
+                        tmp+=max(a[i][j],a[i][n-j-1],a[n-i-1][j],a[n-i-1][n-j-1])
+                        #print(tmp,end=' ')
+                #print()
+        final.append(tmp)
+        tmp=0
+        for i in range(n//2):
+                for j in range(n//2,n):
+                        tmp+=max(a[i][j],a[i][n-j-1],a[n-i-1][j],a[n-i-1][n-j-1])
+        final.append(tmp)
+        tmp=0
+        for i in range(n//2,n):
+                for j in range(n//2):
+                        tmp+=max(a[i][j],a[i][n-j-1],a[n-i-1][j],a[n-i-1][n-j-1])
+        final.append(tmp)
+        tmp=0
+        for i in range(n//2,n):
+                for j in range(n//2,n):
+                        tmp+=max(a[i][j],a[i][n-j-1],a[n-i-1][j],a[n-i-1][n-j-1])
+        final.append(tmp)
+        #print(final)
+        print(max(final))
+for _ in range(int(input())):
+        solve()
