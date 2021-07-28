@@ -1,0 +1,51 @@
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+#
+# Complete the 'lilysHomework' function below.
+#
+# The function is expected to return an INTEGER.
+# The function accepts INTEGER_ARRAY arr as parameter.
+#
+
+def lilysHomework(arr):
+    # Write your code here
+    ind={}
+    for i in range(len(arr)):
+        ind[arr[i]]=i
+    a=arr[:]
+    ind1=ind.copy()
+    
+    a.sort()
+    res=util(arr[:],a,ind)
+    #print(ind,ind1)
+    res=min(res,util(arr,a[::-1],ind1))
+    return res
+def util(arr,a,ind):
+    res=0
+    for i in range(len(arr)):
+        if a[i]!=arr[i]:
+            tmp=arr[i]
+            arr[i],arr[ind[a[i]]]=arr[ind[a[i]]],arr[i]
+            #print(1,a[i],arr[ind[a[i]]],ind[a[i]],ind[arr[i]])
+            ind[a[i]],ind[tmp]=ind[tmp],ind[a[i]]
+            res+=1
+        #print(arr,res,ind)
+    return res
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    n = int(input().strip())
+
+    arr = list(map(int, input().rstrip().split()))
+
+    result = lilysHomework(arr)
+
+    fptr.write(str(result) + '\n')
+
+    fptr.close()
